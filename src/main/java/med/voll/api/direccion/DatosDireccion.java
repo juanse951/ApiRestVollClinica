@@ -1,4 +1,4 @@
-package med.voll.api;
+package med.voll.api.direccion;
 
 public record DatosDireccion(
 

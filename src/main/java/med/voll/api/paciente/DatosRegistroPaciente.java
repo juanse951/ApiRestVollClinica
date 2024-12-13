@@ -1,7 +1,7 @@
 package med.voll.api.paciente;
 
 import med.voll.api.direccion.DatosDireccion;
-
+//dto
 public record DatosRegistroPaciente(
 
         String nombre,

@@ -1,5 +1,5 @@
 package med.voll.api.direccion;
-
+//dto
 public record DatosDireccion(
 
         String calle,

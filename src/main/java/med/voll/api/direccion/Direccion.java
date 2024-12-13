@@ -13,7 +13,7 @@ public class Direccion {
 
     private String calle;
 
-    private Integer numero;
+    private String numero;
 
     private String complemento;
 
@@ -21,4 +21,11 @@ public class Direccion {
 
     private String cuidad;
 
+    public Direccion(DatosDireccion direccion) {
+        this.calle = direccion.calle();
+        this.numero = direccion.numero();
+        this.distrito = direccion.distrito();
+        this.complemento = direccion.complemento();
+        this.cuidad = direccion.ciudad();
+    }
 }

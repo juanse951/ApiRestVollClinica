@@ -17,6 +17,9 @@ public record DatosRegistroMedico(
         String email,
 
         @NotBlank
+        String telefono,
+
+        @NotBlank
         @Pattern(regexp = "\\d{4,6}") //solo de 4 a 6 numeros
         String documento,
 
@@ -27,4 +30,5 @@ public record DatosRegistroMedico(
         @Valid //internamente valida que la direccion contenga all
         DatosDireccion direccion
 ) {
+
 }

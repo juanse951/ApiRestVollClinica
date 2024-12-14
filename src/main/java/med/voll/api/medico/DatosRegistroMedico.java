@@ -24,7 +24,7 @@ public record DatosRegistroMedico(
         Especialidad especialidad,
 
         @NotNull //por que es un objeto
-        @Valid
+        @Valid //internamente valida que la direccion contenga all
         DatosDireccion direccion
 ) {
 }

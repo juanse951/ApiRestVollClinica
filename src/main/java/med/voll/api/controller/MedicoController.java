@@ -21,8 +21,8 @@ public class MedicoController {
         medicoRepository.save(new Medico(datosRegistroMedico));
     }
 
-//    @GetMapping
-//    public List<Medico> listadoMedicos(){
-//        return medicoRepository.findAll();
-//    }
+    @GetMapping
+    public List<Medico> listadoMedicos(){
+        return medicoRepository.findAll();
+    }
 }

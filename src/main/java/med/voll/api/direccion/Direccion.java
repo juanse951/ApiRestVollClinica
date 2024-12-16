@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Direccion {
 
@@ -19,9 +20,6 @@ public class Direccion {
     private String distrito;
 
     private String ciudad;
-
-    public Direccion() {
-    }
 
     public Direccion(DatosDireccion direccion) {
         this.calle = direccion.calle();

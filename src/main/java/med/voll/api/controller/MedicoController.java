@@ -20,7 +20,6 @@ public class MedicoController {
     public void registrarMedico(@RequestBody @Valid DatosRegistroMedico datosRegistroMedico){
         medicoRepository.save(new Medico(datosRegistroMedico));
     }
-
     @GetMapping
     public List<Medico> listadoMedicos(){
         return medicoRepository.findAll();

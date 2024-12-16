@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import med.voll.api.direccion.DatosDireccion;
-//Dto
+//Dto representa la informacion que llega
 public record DatosRegistroMedico(
 
         @NotBlank //valida que nombre no llegue ni nulo ni blanco

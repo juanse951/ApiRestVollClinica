@@ -30,4 +30,9 @@ public class MedicoController {
                 .map(DatosListadoMedico::new);
     }
 
+    @PutMapping
+    public void actualizarMedico(){
+
+    }
+
 }

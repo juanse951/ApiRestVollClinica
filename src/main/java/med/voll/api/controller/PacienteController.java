@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import med.voll.api.paciente.DatosListaPaciente;
 import med.voll.api.paciente.DatosRegistroPaciente;
 import med.voll.api.paciente.Paciente;
 import med.voll.api.paciente.PacienteRepository;
@@ -26,6 +27,7 @@ public class PacienteController {
 
     @GetMapping
     public Page<DatosListaPaciente> listar(@PageableDefault(page=0, size = 10, sort = {"nombre"})Pageable paginacion){
-        return repository.findAll(paginacion).map(DatosListaPaciente)
+        return repository.findAll(paginacion)
+                .map(DatosListaPaciente::new);
     }
 }

@@ -28,4 +28,5 @@ public class MedicoController {
         return medicoRepository.findAll(paginacion)
                 .map(DatosListadoMedico::new);
     }
+
 }

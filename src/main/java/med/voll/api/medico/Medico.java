@@ -50,7 +50,7 @@ public class Medico {
         if(datosActualizarMedico.documento() != null){
             this.documento = datosActualizarMedico.documento();
         }
-        if(direccion.actualizarDatos(datosActualizarMedico.direccion()) != null ){
+        if(datosActualizarMedico.direccion() != null){
             this.direccion = direccion.actualizarDatos(datosActualizarMedico.direccion());
         }
     }

@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import med.voll.api.direccion.DatosDireccion;
 import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,10 +34,15 @@ public class MedicoController {
 
     @PutMapping
     @Transactional
-    public void actualizarMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico){
+    public ResponseEntity actualizarMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico){
         Medico medico = medicoRepository
                 .getReferenceById(datosActualizarMedico.id());
         medico.actualizarDatos(datosActualizarMedico);
+        return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(),
+                medico.getTelefono(), medico.getEspecialidad().toString(),
+                new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getDistrito(),
+                        medico.getDireccion().getCiudad(),medico.getDireccion().getNumero(),
+                        medico.getDireccion().getComplemento())));
     }
 
     //DELETE LOGICO

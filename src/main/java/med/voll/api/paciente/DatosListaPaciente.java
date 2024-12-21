@@ -2,6 +2,8 @@ package med.voll.api.paciente;
 //Dto representa la informacion que sale
 public record DatosListaPaciente(
 
+        Long id,
+
         String nombre,
 
         String email,
@@ -9,6 +11,6 @@ public record DatosListaPaciente(
         String documentoIdentidad) {
 
     public DatosListaPaciente(Paciente paciente){
-        this(paciente.getNombre(), paciente.getEmail(), paciente.getDocumentoIdentidad());
+        this(paciente.getId(), paciente.getNombre(), paciente.getEmail(), paciente.getDocumentoIdentidad());
     }
 }

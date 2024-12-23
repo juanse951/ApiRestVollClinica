@@ -9,21 +9,21 @@ import med.voll.api.domain.direccion.DatosDireccion;
 //dto
 public record DatosRegistroPaciente(
 
-        @NotBlank
+        @NotBlank(message = "{nombre.obligatorio}")
         String nombre,
 
-        @NotBlank
-        @Email
+        @NotBlank(message = "{email.obligatorio}")
+        @Email(message = "{email.invalido}")
         String email,
 
-        @NotBlank
+        @NotBlank(message = "{telefono.obligatorio}")
         String telefono,
 
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}") //solo de 4 a 6 numeros
+        @NotBlank(message = "{documento.obligatorio}")
+        @Pattern(regexp = "\\d{4,6}", message = "{documento.invalido}") //solo de 4 a 6 numeros
         String documentoIdentidad,
 
-        @NotNull
+        @NotNull(message = "{direccion.obligatorio}")
         @Valid
         DatosDireccion direccion
         ) {

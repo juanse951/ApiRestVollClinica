@@ -9,24 +9,24 @@ import med.voll.api.domain.direccion.DatosDireccion;
 //Dto representa la informacion que llega
 public record DatosRegistroMedico(
 
-        @NotBlank //valida que nombre no llegue ni nulo ni blanco
+        @NotBlank(message = "{nombre.obligatorio}") //valida que nombre no llegue ni nulo ni blanco
         String nombre,
 
-        @NotBlank
-        @Email
+        @NotBlank(message = "{email.obligatorio}")
+        @Email(message = "{email.invalido}")
         String email,
 
-        @NotBlank
+        @NotBlank(message = "{telefono.obligatorio}")
         String telefono,
 
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}") //solo de 4 a 6 numeros
+        @NotBlank(message = "{documento.obligatorio}")
+        @Pattern(regexp = "\\d{4,6}", message = "{documento.invalido}") //solo de 4 a 6 numeros
         String documento,
 
-        @NotNull
+        @NotNull(message = "{especialidad.obligatorio}")
         Especialidad especialidad,
 
-        @NotNull //por que es un objeto
+        @NotNull(message = "{direccion.obligatorio}") //por que es un objeto
         @Valid //internamente valida que la direccion contenga all
         DatosDireccion direccion
 ) {

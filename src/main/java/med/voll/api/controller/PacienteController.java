@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import med.voll.api.direccion.DatosDireccion;
 import med.voll.api.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -19,13 +22,17 @@ public class PacienteController {
     private PacienteRepository pacienteRepository;
 
     @PostMapping
-    @Transactional
     public ResponseEntity<DatosRespuestaPaciente> registrarPaciente(@RequestBody @Valid DatosRegistroPaciente datosRegistroPaciente,
                                                                     UriComponentsBuilder uriComponentsBuilder){
         Paciente paciente = pacienteRepository.save(new Paciente(datosRegistroPaciente));
+        DatosRespuestaPaciente datosRespuestaPaciente = new DatosRespuestaPaciente(paciente.getId(), paciente.getNombre(), paciente.getEmail(),
+                paciente.getTelefono(), paciente.getDocumentoIdentidad().toString(),
+                new DatosDireccion(paciente.getDireccion().getCalle(),paciente.getDireccion().getDistrito(),
+                        paciente.getDireccion().getCiudad(),paciente.getDireccion().getNumero(),
+                        paciente.getDireccion().getComplemento()));
 
-        var uri = uriComponentsBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DatosRespuestaPaciente(paciente));
+        URI uri = uriComponentsBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+        return ResponseEntity.created(uri).body(datosRespuestaPaciente);
     }
 
     @GetMapping

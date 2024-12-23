@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.authentication.AuthenticationManager;
 
-
+//cargar el usuario y devolver token
 @RestController
 @RequestMapping("/login")
 public class AutenticacionController {

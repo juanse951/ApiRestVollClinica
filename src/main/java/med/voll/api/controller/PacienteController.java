@@ -7,38 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
 
     @Autowired
-    private PacienteRepository repository;
+    private PacienteRepository pacienteRepository;
 
     @PostMapping
     @Transactional
-    public void registrar(@RequestBody @Valid DatosRegistroPaciente datos){
-        repository.save(new Paciente(datos));
+    public ResponseEntity<DatosRespuestaPaciente> registrarPaciente(@RequestBody @Valid DatosRegistroPaciente datosRegistroPaciente,
+                                                                    UriComponentsBuilder uriComponentsBuilder){
+        Paciente paciente = pacienteRepository.save(new Paciente(datosRegistroPaciente));
+
+        var uri = uriComponentsBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DatosRespuestaPaciente(paciente));
     }
 
     @GetMapping
     public Page<DatosListaPaciente> listar(@PageableDefault(page=0, size = 10, sort = {"nombre"})Pageable paginacion){
-        return repository.findAll(paginacion)
+        return pacienteRepository.findAll(paginacion)
                 .map(DatosListaPaciente::new);
     }
 
     @PutMapping
     @Transactional
     public void actualizar(@RequestBody @Valid DatosActualizacionPaciente datos){
-        Paciente paciente = repository.getReferenceById(datos.id());
+        Paciente paciente = pacienteRepository.getReferenceById(datos.id());
         paciente.actualizarInformacion(datos);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public void remover(@PathVariable Long id){
-        Paciente paciente = repository.getReferenceById(id);
+        Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.inactivar();
     }
 }

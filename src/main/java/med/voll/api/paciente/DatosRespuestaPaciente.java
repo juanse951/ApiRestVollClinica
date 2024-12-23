@@ -1,9 +1,7 @@
 package med.voll.api.paciente;
-
-import med.voll.api.direccion.DatosDireccion;
 import med.voll.api.direccion.Direccion;
 
-public record DatosDetalladoPaciente(
+public record DatosRespuestaPaciente(
 
         String nombre,
 
@@ -15,7 +13,7 @@ public record DatosDetalladoPaciente(
 
         Direccion direccion) {
 
-    public DatosDetalladoPaciente(Paciente paciente) {
+    public DatosRespuestaPaciente(Paciente paciente) {
         this(paciente.getNombre(), paciente.getEmail(), paciente.getTelefono(),
                 paciente.getDocumentoIdentidad(), paciente.getDireccion());
     }

@@ -1,11 +1,8 @@
-package med.voll.api.medico;
+package med.voll.api.domain.medico;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import lombok.Lombok;
-import med.voll.api.direccion.DatosDireccion;
-
-import java.lang.annotation.Documented;
+import med.voll.api.domain.direccion.DatosDireccion;
 
 //DTO para actulizar la informacion
 public record DatosActualizarMedico(

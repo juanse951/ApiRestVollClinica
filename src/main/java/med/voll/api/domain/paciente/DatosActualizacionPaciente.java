@@ -1,8 +1,8 @@
-package med.voll.api.paciente;
+package med.voll.api.domain.paciente;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import med.voll.api.direccion.DatosDireccion;
+import med.voll.api.domain.direccion.DatosDireccion;
 
 //Dto de actualizacion
 public record DatosActualizacionPaciente(

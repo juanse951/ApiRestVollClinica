@@ -56,8 +56,25 @@ public class PacienteController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void remover(@PathVariable Long id){
+    public ResponseEntity remover(@PathVariable Long id){
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.inactivar();
+
+        return ResponseEntity.noContent().build();
     }
+
+    //devolver los datos de un paciente
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRespuestaPaciente> retornarPacientes(@PathVariable Long id){
+        Paciente paciente = pacienteRepository.getReferenceById(id);
+
+        var datosPacientes = new DatosRespuestaPaciente(paciente.getId(), paciente.getNombre(), paciente.getEmail(),
+                paciente.getTelefono(), paciente.getDocumentoIdentidad().toString(),
+                new DatosDireccion(paciente.getDireccion().getCalle(),paciente.getDireccion().getDistrito(),
+                        paciente.getDireccion().getCiudad(),paciente.getDireccion().getNumero(),
+                        paciente.getDireccion().getComplemento()));
+
+        return ResponseEntity.ok(datosPacientes);
+    }
+
 }

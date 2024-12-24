@@ -27,7 +27,7 @@ public class TokenService {
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
-            throw new RuntimeException();
+            throw new RuntimeException("error al generar el  token jwt", exception);
         }
     }
 

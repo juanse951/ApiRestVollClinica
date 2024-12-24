@@ -14,7 +14,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("El filtro está siendo llamado");
+        //System.out.println("El filtro está siendo llamado");
         filterChain.doFilter(request,response);// unica forma de llamar al filtro
     }
 }

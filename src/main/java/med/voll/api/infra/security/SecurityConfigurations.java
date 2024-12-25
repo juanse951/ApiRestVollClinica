@@ -22,7 +22,7 @@ public class SecurityConfigurations {
         return httpSecurity.csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)// le indicamos a spring el tipo de sesion
                 .and().authorizeRequests()
-                .requestMatchers(HttpMethod.POST,"/login/")
+                .requestMatchers(HttpMethod.POST,"/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

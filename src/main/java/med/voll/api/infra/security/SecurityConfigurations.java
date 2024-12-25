@@ -20,7 +20,12 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)// le indicamos a spring el tipo de sesion
+                .and().authorizeRequests()
+                .requestMatchers(HttpMethod.POST,"/login/")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and().build();
     }
 

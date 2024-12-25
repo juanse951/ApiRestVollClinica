@@ -29,6 +29,8 @@ public class SecurityConfigurations {
                 .and().authorizeRequests()
                 .requestMatchers(HttpMethod.POST,"/login")
                 .permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/medicos").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/pacientes").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

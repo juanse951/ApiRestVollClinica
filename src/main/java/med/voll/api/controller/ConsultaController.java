@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("consultas")
+@RequestMapping("/consultas")
 public class ConsultaController {
 
     @PostMapping
     @Transactional
     public ResponseEntity reservar(@RequestBody @Valid DatosReservaConsulta datos){//lo que recibimos de la api
-        System.out.println(datos);
         return ResponseEntity.ok(new DatosDetalleConsulta(null,null,null,null));//lo que devolvemos
     }
 }

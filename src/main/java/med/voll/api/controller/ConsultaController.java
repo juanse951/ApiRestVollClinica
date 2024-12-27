@@ -23,9 +23,9 @@ public class ConsultaController {
     @Transactional
     public ResponseEntity reservar(@RequestBody @Valid DatosReservaConsulta datos){//lo que recibimos de la api
 
-        reserva.reservar(datos);
+        var detalleConsulta =  reserva.reservar(datos);
 
-        return ResponseEntity.ok(new DatosDetalleConsulta(null,null,null,null));//lo que devolvemos
+        return ResponseEntity.ok(detalleConsulta);//lo que devolvemos
     }
 
     @DeleteMapping

@@ -1,6 +1,7 @@
 package med.voll.api.infra.errores;
 
 import jakarta.persistence.EntityNotFoundException;
+import med.voll.api.domain.ValidacionException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,6 +21,11 @@ public class TratadorDeErrores {
         var errores = e.getFieldErrors().stream()
                 .map(DatosErrorValidacion::new).toList();
         return ResponseEntity.badRequest().body(errores);
+    }
+
+    @ExceptionHandler(ValidacionException.class)
+    public ResponseEntity tratarErrorDeValidacion(ValidacionException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     //Dto solo se usara a este nivel por eso se crea aqui mismo

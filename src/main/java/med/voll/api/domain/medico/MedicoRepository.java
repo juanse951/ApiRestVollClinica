@@ -6,24 +6,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 
-public interface MedicoRepository extends JpaRepository <Medico, Long>{
+public interface MedicoRepository extends JpaRepository <Medico, Long> {
     Page<Medico> findByActivoTrue(Pageable paginacion);
 
     @Query("""
-        select m from Medico m  -- Selecciona un médico (entidad Medico) desde la base de datos.
-        where
-        m.activo = 1           -- Filtra únicamente los médicos que están marcados como activos.
-        and
-        m.especialidad = :especialidad  -- Filtra los médicos que tienen la especialidad indicada como parámetro.
-        and m.id not in (       -- Excluye médicos cuyo ID esté en la lista de:
-            select c.medico.id from Consulta c  -- Selecciona los IDs de médicos que tienen consultas programadas.
+            select m from Medico m
             where
-            c.fecha = :fecha    -- Filtra las consultas que coincidan con la fecha proporcionada como parámetro.
-        )
-        order by rand()         -- Ordena aleatoriamente los resultados para obtener uno de manera aleatoria.
-        limit 1                 -- Limita el resultado a solo un médico.
-        """)
-    Medico elegirMedicoAleatorioDisponibleEnLaFecha(Especialidad especialidad, @NotNull @Future LocalDateTime fecha);
+            m.activo = TRUE
+            and
+            m.especialidad = :especialidad
+            and m.id not in(
+                select c.medico.id from Consulta c
+                where
+                c.fecha = :fecha
+            )
+            order by rand()
+            limit 1
+            """)
+    Medico elegirMedicoAleatorioDisponibleEnLaFecha(Especialidad especialidad, LocalDateTime fecha);
+}
+
+

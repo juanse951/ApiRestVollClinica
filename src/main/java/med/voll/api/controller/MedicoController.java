@@ -58,7 +58,7 @@ public class MedicoController {
 
     //DELETE LOGICO
     @DeleteMapping("/{id}")
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     @Transactional
 
     public ResponseEntity eliminarMedico(@PathVariable Long id) {

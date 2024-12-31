@@ -58,7 +58,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     @Transactional
     public ResponseEntity remover(@PathVariable Long id){
         Paciente paciente = pacienteRepository.getReferenceById(id);

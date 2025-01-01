@@ -14,5 +14,7 @@ public record DatosRespuestaMedico(
 
         String documento,
 
+        Especialidad especialidad,
+
         DatosDireccion direccion) {
 }
